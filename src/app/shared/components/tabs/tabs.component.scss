@@ -1,0 +1,11 @@
+/* Faqat "custom-tab-group" ichidagi label'lar uchun */
+.custom-tab-group .mat-tab-label {
+    color: gray; /* Default rang */
+    transition: all 0.3s ease;
+  }
+  
+  .custom-tab-group .mat-tab-label:hover {
+    background: linear-gradient(to right, #ff5722, #03a9f4);
+    cursor: pointer;
+  }
+  
