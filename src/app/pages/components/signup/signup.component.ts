@@ -26,6 +26,12 @@ export default class SignUpComponent {
     this.inputContainer.nativeElement.classList.remove('focused');
     this.onTouched();
   }
-  
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      console.log('Form Submitted:', form.value);
+    } else {
+      console.error('Form is invalid');
+    }
+  }
 
 }
