@@ -11,6 +11,7 @@ import { MatTooltip } from '@angular/material/tooltip';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule , MatTooltip],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule , MatTooltip ],
 })
-export class ToolbarOverviewExample {}
+export class ToolbarOverviewExample {
+}

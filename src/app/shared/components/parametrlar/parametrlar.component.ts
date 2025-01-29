@@ -1,114 +1,91 @@
-import { Component } from "@angular/core";
-import { ParametrSavollar } from "../../models/frontend/parametr-savollar";
-import { NgFor } from "@angular/common";
-import { MatButtonModule } from "@angular/material/button";
-import { MatListModule } from "@angular/material/list";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatRadioModule } from "@angular/material/radio";
+import { Component, inject, Inject } from "@angular/core"
+import { ParametrSavollar, savol } from "../../models/frontend/parametr-savollar"
+import { MatRadioModule } from "@angular/material/radio"
+import { CommonModule, NgIf } from "@angular/common"
+import { FormsModule } from "@angular/forms"
+import { MatButtonModule } from "@angular/material/button"
+import { MatIconModule } from "@angular/material/icon"
+import { type ParametrAnswers, calculateResults } from "../../models/frontend/parametr-result-types"
+import { MatDialog, MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog"
 
 @Component({
-    selector:"app-parametrlar",
-    templateUrl:'./parametrlar.component.html',
-    imports:[NgFor, MatButtonModule , MatRadioModule],
-    styleUrl:'./parametrlar.component.scss',
-
+  selector: "app-parametrlar",
+  standalone: true,
+  templateUrl: "./parametrlar.component.html",
+  styleUrls: ["./parametrlar.component.scss"],
+  imports: [MatRadioModule, FormsModule, MatButtonModule, MatIconModule, NgIf, MatDialogModule, CommonModule],
 })
-
 export class Parametrlar {
-     savol:ParametrSavollar[] = [
-        {
-            id: 1,
-            savol: 'Беморлар ўртача ёши:',
-            variant1: "56-60",
-            variant2: "60-70",
-        },
-        {
-            id: 2,
-            savol: 'Шароит (ишлаш ва яшаш шароитида зарарли омиллар мавжудлиги (зах ва б.):',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 3,
-            savol: 'Чекиш (бемор чекади, олдин чаккан):',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 4,
-            savol: 'Аллергик восита билан контакт (Бемор аллергик воситалар билан доимий алоқада бўлади: кимёвий моддалар):',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 5,
-            savol: 'Совук (совуқ шароитда бемор регуляр бўлиши, иш ёки уйда):',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 6,
-            savol: 'Ирсият (наслда касаллик учраши, яқин қариндошларида ушбу касаллик кузатилганлиги):',
-            variant1: "Кузатилган",
-            variant2: "Кузатилмаган",
-        },
-        {
-            id: 7,
-            savol: 'Касаллик бошланиши:',
-            variant1: "Секин аста – йиллар давомида",
-            variant2: "Тезда",
-        },
-        {
-            id: 8,
-            savol: 'Касаллик кечиши:',
-            variant1: "Ўрта авж олиши",
-            variant2: "Тез авж олиши",
-        },
-        {
-            id: 9,
-            savol: 'Даволаш самара бердими?',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 10,
-            savol: 'Хуружлар билан кечиши:',
-            variant1: "Ха",
-            variant2: "Йўқ",
-        },
-        {
-            id: 11,
-            savol: 'Йўтал кузатилиши:',
-            variant1: "Кузатилади доимий эрталаб",
-            variant2: "Кузатилади кун давомида",
-            variant3: "Кузатилмайди",
-        },
-        {
-            id: 12,
-            savol: 'Балғам ранги бор/йўқлиги:',
-            variant1: "Шиллиқ йирингли",
-            variant2: "Балғам кузатилмайди",
-            variant3: "Шиллиқ йирингли ёки кузатилмайди",
-        },
-        {
-            id: 13,
-            savol: 'Хансираш:',
-            variant1: "Ифодаланган",
-            variant2: "Доимий",
-        },
-        {
-            id: 14,
-            savol: 'Оғриқлар (кўкрак кафасидаги оғриқлар мавжудлиги):',
-            variant1: "Мавжуд",
-            variant2: "Мавжуд эмас",
-        },
-        {
-            id: 15,
-            savol: 'Иситма:',
-            variant1: "Йўқ",
-            variant2: "37-38",
-            variant3: "39-40",
-        },
-    ];
+  savollar = savol
+  answers: ParametrAnswers = {}
+  dialog = inject(MatDialog)
+
+  constructor() {}
+
+  openDialog() {
+    this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        answers: this.answers,
+      },
+    })
+  }
+
+  currentPage = 0
+
+  get currentSavol() {
+    return this.savollar[this.currentPage]
+  }
+
+  nextPage() {
+    if (this.currentPage < this.savollar.length - 1) {
+      this.currentPage++
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--
+    }
+  }
+
+  isAllQuestionsAnswered(): boolean {
+    return this.savollar.every((savol, index) => this.answers[index] !== undefined)
+  }
+
+  submitAnswers() {
+    if (this.isAllQuestionsAnswered()) {
     
+      const results = calculateResults(this.answers)
+     
+      this.openResultDialog(results)
+    } else {
+      alert("Iltimos, barcha savollarga javob bering.")
+    }
+  }
+
+  openResultDialog(results: { [key: string]: number }) {
+    this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        results: results,
+      },
+    })
+  }
 }
+
+@Component({
+  selector: "dialog-data-example-dialog",
+  standalone: true,
+  templateUrl: "./dialog-data-example-dialog.html",
+  imports: [CommonModule, MatDialogModule],
+})
+export class DialogDataExampleDialog {
+  constructor(
+    @Inject(MatDialogRef) public dialogRef: MatDialogRef<DialogDataExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { results: { [key: string]: number } }
+  ) {}
+
+  closeDialog() {
+    this.dialogRef.close()
+  }
+}
+

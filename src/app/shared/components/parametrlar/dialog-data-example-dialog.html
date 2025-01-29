@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Натижалар</h2>
+<mat-dialog-content>
+  <div *ngFor="let result of data.results | keyvalue">
+    <p>{{ result.key }}: {{ result.value }}%</p>
+    <p>Бемор {{ result.value }}% еҳтимоллик билан {{ result.key }} касаллигига чалинган</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Yopish</button>
+</mat-dialog-actions>
+

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, Inject, inject} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -6,6 +6,8 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { CommonModule, NgFor } from '@angular/common';
+import { ParametrAnswers } from '../../models/frontend/parametr-result-types';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -17,7 +19,7 @@ export interface DialogData {
 @Component({
   selector: 'dialog-data-example',
   templateUrl: './dialog-data-example.html',
-  imports: [MatButtonModule],
+  imports: [MatButtonModule , CommonModule],
 })
 export class DialogDataExample {
   dialog = inject(MatDialog);
@@ -34,8 +36,12 @@ export class DialogDataExample {
 @Component({
   selector: 'dialog-data-example-dialog',
   templateUrl: './dialog-data-example-dialog.html',
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [MatDialogTitle, MatDialogContent , CommonModule ],
 })
 export class DialogDataExampleDialog {
-  data = inject(MAT_DIALOG_DATA);
+  //  data = inject(MAT_DIALOG_DATA);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { javoblar: { savol: string; javob: string; togri: boolean }[]; natija: string }) {}
+
+  parametrAnswers:ParametrAnswers = {}
+
 }

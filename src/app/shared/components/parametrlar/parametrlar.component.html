@@ -1,25 +1,53 @@
 <main>
-    <div class="container mx-auto flex items-center justify-center flex-col  w-full shadow-xl p-4 overflow-scroll h-[35rem]">
-        <h2 class="text-4xl mt-[110rem]">I Сурункали ўпка обструктив касаллиги</h2>
-        <mark class="mt-3 text-2xl">СЎОК бронхитик тип </mark>
-        
-            <form action="" class="flex items-center justify-center flex-col">
-                <ol class="mt-12">
-                    <li *ngFor="let item of savol; let i = index">
-                        <strong>{{ i + 1 }}. {{ item.savol }}</strong>
-                        <ul class="ml-6 list-none">
-                            <mat-radio-group aria-labelledby="example-radio-group-label"
-                            class="example-radio-group">
-                            <mat-radio-button value="1">{{item.variant1}}</mat-radio-button>
-                            <mat-radio-button value="2">{{item.variant2}}</mat-radio-button>
-                            @if (item.variant3) {
-                                <mat-radio-button value="2">{{item.variant3}}</mat-radio-button>
-                            }
-                        </mat-radio-group>
-                    </ul>
-                </li>
-            </ol>
-            <button type="button" mat-flat-button class="!p-3 !rounded-lg mx-auto">Жўнатиш</button>
-        </form>
+    <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 h-[35rem]">
+      <h2 class="text-4xl mb-4">Касаллик параметрларни танланг</h2>
+  
+      <form class="flex items-center justify-center flex-col w-full max-w-2xl">
+        <div class="question-card relative" *ngIf="currentSavol">
+          <strong class="text-xl block mb-4">{{ currentPage + 1 }}. {{ currentSavol.savol }}</strong>
+          <mat-radio-group
+            [(ngModel)]="answers[currentPage]"
+            name="answer-{{ currentPage }}"
+            aria-labelledby="example-radio-group-label"
+            class="radio-group"
+          >
+            <mat-radio-button value="1" class="radio-button w-full border">{{ currentSavol.variant1 }}</mat-radio-button>
+            <mat-radio-button value="2" class="radio-button w-full border">{{ currentSavol.variant2 }}</mat-radio-button>
+            <mat-radio-button *ngIf="currentSavol.variant3" value="3" class="radio-button w-full border">{{ currentSavol.variant3 }}</mat-radio-button>
+          </mat-radio-group>
+          <div class="absolute right-3 bottom-2">
+            {{ currentPage + 1 }}  of {{savollar.length}}
+          </div>
+        </div>
+  
+        <div class="flex mt-6">
+          <button
+            type="button"
+            mat-raised-button
+            class="mr-4"
+            [disabled]="currentPage === 0"
+            (click)="previousPage()"
+          >
+         <span class="flex items-center">
+             <mat-icon>chevron_left</mat-icon>
+             олдинги
+            </span>
+          </button>
+          <button
+            type="button"
+            mat-raised-button
+            [disabled]="currentPage === savollar.length - 1"
+            (click)="nextPage()"
+          >
+          <span class="flex items-center justify-center">кейинги
+              <mat-icon>chevron_right</mat-icon>
+          </span> 
+        </button>
+        </div>
+        <button mat-flat-button color="primary" (click)="submitAnswers()" class="mx-auto mt-6" [disabled]="!isAllQuestionsAnswered()">
+          Жўнатиш
+        </button>
+      </form>
     </div>
-</main>
+  </main>
+  

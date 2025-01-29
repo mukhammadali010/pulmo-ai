@@ -8,6 +8,7 @@ import { ImageUpload } from "../image-upload/image-upload.component";
  */
 @Component({
   selector: 'app-tabs',
+  standalone:true,
   templateUrl: './tabs.component.html',
   styleUrl:'./tabs.component.scss',
   imports: [MatTabsModule, Parametrlar, ImageUpload],
