@@ -94,17 +94,28 @@ export class DialogDataExampleDialog {
         text: "Kasalliklar foiz ko'rsatkichlari",
       },
       animationEnabled: true,
+      axisY: {
+        maximum: 100 // Y o'qidagi maksimal qiymat har doim 100 bo'ladi
+      },
       data: [
         {
           type: "column",
           dataPoints: Object.keys(results).map((key) => ({
             label: key,
             y: results[key],
+            color: this.getColor(results[key]), // Foizga mos rangni tanlash
           })),
         },
       ],
     };
   }
+
+  getColor(percentage: number): string {
+    if (percentage >= 70) return "brown"; 
+    if (percentage >= 40) return "#FFC107"; 
+    return "#4CAF50";
+  }
+
 
   closeDialog() {
     this.dialogRef.close()
