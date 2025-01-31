@@ -111,8 +111,8 @@ export class DialogDataExampleDialog {
   }
 
   getColor(percentage: number): string {
-    if (percentage >= 70) return "brown"; 
-    if (percentage >= 40) return "#FFC107"; 
+    if (percentage >= 85) return "brown"; 
+    if (percentage >= 70) return "#FFC107"; 
     return "#4CAF50";
   }
 
