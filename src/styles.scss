@@ -13,3 +13,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     @apply hover:bg-gradient-to-r hover:from-blue-950 hover:to-pink-700 hover:bg-clip-text hover:text-transparent !important;
 }
 
+.mat-internal-form-field > label {
+    padding: 10px !important;
+    width: 100% !important;
+}
+
+.mat-mdc-radio-button .mat-internal-form-field{
+    width: 100%;
+
+}
+a.canvasjs-chart-credit{
+    display: none;
+}

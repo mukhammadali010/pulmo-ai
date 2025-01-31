@@ -1,9 +1,12 @@
 <h2 mat-dialog-title>Натижалар</h2>
 <mat-dialog-content>
   <div *ngFor="let result of data.results | keyvalue">
-    <p>{{ result.key }}: {{ result.value }}%</p>
+    <p><mark>{{ result.key }}</mark>: {{ result.value }}%</p>
     <p>Бемор {{ result.value }}% еҳтимоллик билан {{ result.key }} касаллигига чалинган</p>
   </div>
+  <div>
+    <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>    
+</div>                        
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Yopish</button>
