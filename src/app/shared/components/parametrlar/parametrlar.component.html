@@ -23,8 +23,8 @@
         <div class="flex mt-6">
           <button
             type="button"
-            mat-raised-button
-            class="mr-4"
+           
+            class="group-gradient mr-4"
             [disabled]="currentPage === 0"
             (click)="previousPage()"
           >
@@ -35,7 +35,8 @@
           </button>
           <button
             type="button"
-            mat-raised-button
+           
+            class="group-gradient"
             [disabled]="currentPage === savollar.length - 1"
             (click)="nextPage()"
           >

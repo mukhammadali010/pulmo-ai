@@ -1,0 +1,41 @@
+
+.container {
+    background-color: #f9fafb;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  .question-card {
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 40px;
+    
+  }
+
+  .custom-file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    
+  }
+
+  .custom-file-upload:hover {
+  @apply hover:bg-gradient-to-r hover:from-blue-950 hover:to-pink-700 hover:bg-clip-text hover:text-transparent;
+  }
+
+  /* Fayl inputni yashiramiz */
+  #fileInput {
+    display: none;
+  }

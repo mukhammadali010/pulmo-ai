@@ -1,19 +1,11 @@
-<div #inputContainer class="w-full py-[0.6rem] px-4 rounded-lg flex items-center gap-2 border border-solid border-gray-300">
-    <img *ngIf="title === inputTypes.Email else passwordIcon" src="assets/icons/message.svg" alt="">
-    <ng-template #passwordIcon>
-        <img src="assets/icons/password.svg" alt="">
-    </ng-template>
-    <input 
-        [name]="name" 
-        [value]="value"
-        [type]="title === inputTypes.Password && isPasswordHidden() ? inputTypes.Text : inputTypes.Password"  
-        [placeholder]="title === inputTypes.Email ? 'Электрон почта манзили ёки фойдаланувчи номи' : title === inputTypes.Password ? 'Парол' : 'Исмингиз'" 
-        class="border-none bg-transparent w-full outline-none" 
-        (input)="onInputChange($event)" 
-        (blur)="onBlur()" 
-        (focus)="onFocus()" 
-        [disabled]="isDisabled">
-    <button *ngIf="title === inputTypes.Password" type="button" (click)="onPasswordToggle()" class="flex items-center">
-        <mat-icon class="text-[#667085] line-clamp-none">{{isPasswordHidden() ? 'visibility' : 'visibility_off'}}</mat-icon>
-    </button>
-</div>
+<div #inputContainer
+    class="w-full py-[0.6rem] bg-[#F9FAFB] border border-solid border-gray-300 rounded-lg flex items-center gap-2 p-4 ">
+    <img [src]="imgUrl()" alt="">
+   
+    
+    <input [type]="title() === inputTypes.Password ? isPasswordHidden()? inputTypes.Text:inputTypes.Password : title()" name="" (blur)="onBlur()" (focus)="onFocus()"
+        [placeholder]="placeholder()" class="outline-none bg-transparent w-full" id="">
+  
+    <button *ngIf="title() === inputTypes.Password" type="button" (click)="onPasswordToggle() "><mat-icon class="text-[#667085] line-clamp-none">{{isPasswordHidden()?
+            'visibility':'visibility_off'}}</mat-icon></button>
+</div>      

@@ -25,3 +25,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 a.canvasjs-chart-credit{
     display: none;
 }
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: #f2f2f3 !important;
+}

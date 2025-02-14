@@ -1,5 +1,5 @@
-<mat-toolbar class="!flex !items-center justify-between !bg-gray-200 rounded-lg m-6">
-          <span class="flex items-center text-2xl font-bold bg-gradient-to-r from-blue-950  to-pink-700 bg-clip-text text-transparent cursor-pointer" ><img src="assets/images/logo.png" alt="" class="w-12">Pulmo AI</span>
+<mat-toolbar class="!flex !items-center justify-between !bg-gray-200 rounded-lg m-6 sticky top-0 z-10">
+          <span class="flex items-center text-2xl font-bold bg-gradient-to-r from-blue-950  to-pink-700 bg-clip-text text-transparent cursor-pointer" routerLink="/home"><img src="assets/images/logo.png" alt="" class="w-12" >Pulmo AI</span>
     <div class="flex items-center gap-3">
     
     
@@ -8,11 +8,16 @@
       <button mat-button  class="primary-button"><mat-icon class="!mx-auto group-gradient"><a href="https://t.me/muhammadalinosirov" target="_blank">telegram</a></mat-icon></button>
       
     </div>
-    <div class="flex items-center gap-2 text-left">
+    <div class="flex items-center gap-2 text-left" [matMenuTriggerFor]="menu">
         <p class="text-sm text-right cursor-pointer group-gradient">Носиров.М.У <br> <span >muhammadalinosirov34gmail.com</span></p>
         <button mat-icon-button class="!bg-gray-400" aria-label="Example icon-button with heart icon">
             <mat-icon>person</mat-icon>
         </button>
+        <mat-menu #menu="matMenu"  xPosition="before" class="mt-4">
+          <button mat-menu-item routerLink="/profile">Профил</button>
+          <button mat-menu-item routerLink="/results">Натижалар</button>
+          <button mat-menu-item routerLink="/login">Чиқиш</button>
+        </mat-menu>
     </div>
   </mat-toolbar>
   

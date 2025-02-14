@@ -1,1 +1,45 @@
-<p>profile works!</p>
+<app-navbar/>
+<div class="container mx-auto flex items-center  flex-col w-full shadow-xl h-[35rem]">
+	<div class="question-card flex items-center justify-center flex-col bg-gradient-to-r from-blue-600  to-pink-400"></div>
+  <div class="flex items-center justify-between w-full p-6">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/user-profile.png" alt="" class="w-36 rounded-full">
+      <div>
+        <h4 class="font-bold">Муҳаммадали Носиров</h4>
+      <span>muhammadalinosirov34gmail.com</span>
+      </div>
+    </div>
+   <button mat-flat-button>таҳрирлаш</button>
+  </div>
+  <form action="#" class="w-full p-6 flex gap-4">
+      <div class="flex justify-start flex-col w-full">
+        <div>
+          <label for="">Исм</label>
+          <app-input [title]="inputTypes.Text" [placeholder]="'Исм киритинг'"/>
+        </div>
+        <div>
+          <label for="">Email</label>
+          <app-input [title]="inputTypes.Email" [placeholder]="'Емаил киритинг'"/>
+        </div>
+        <div>
+          <label for="">Парол</label>
+          <app-input [title]="inputTypes.Password" [placeholder]="'Парол киритинг'"/>
+        </div>
+      </div>
+      <div class="flex justify-start flex-col w-full">
+        <div>
+          <label for="">Фамиля</label>
+          <app-input [title]="inputTypes.Text" [placeholder]="'Фамиля киритинг'"/>
+        </div>
+        <div>
+          <label for="">Телефон рақам</label>
+          <app-input [title]="inputTypes.Text" [placeholder]="'Телефон киритинг'"/>
+        </div>
+        <div>
+          <label for="">Паролни тасдиқлаш</label>
+          <app-input [title]="inputTypes.Password" [placeholder]="'Паролни киртинг'"/>
+        </div>
+      </div>
+      
+  </form>
+</div>

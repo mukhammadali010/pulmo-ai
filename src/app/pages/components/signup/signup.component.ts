@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { InputTypes } from '../../../shared/models/frontend/input-types';
-import { InputComponent } from '../../../shared/components/input/input.component';
+
+
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { InputTypes } from '../../../shared/models/frontend/input-types';
 
 @Component({
   selector: 'app-signup',

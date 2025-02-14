@@ -1,76 +1,43 @@
-import { Component, ElementRef, forwardRef, Input, signal, ViewChild } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { InputTypes } from "../../models/frontend/input-types";
+import { CommonModule } from "@angular/common";
+import { AfterViewInit, Component, ElementRef, input, Input, signal, viewChild, ViewChild } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf } from "@angular/common";
+import {  InputTypes } from "../../models/frontend/input-types";
+
+
+
 
 @Component({
-    selector: 'app-input',
+    selector: "app-input",
     templateUrl: "./input.component.html",
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputComponent),
-            multi: true,
-        }
-    ],
-    imports: [MatIconModule, NgIf],
+    imports:[ CommonModule ,  MatIconModule],
     styles: [
-        `
-        .focused {
+        ` .focused{
             @apply outline outline-blue-500 outline-1;
         }
         `
     ]
+
 })
-export class InputComponent implements ControlValueAccessor {
-    @Input() title!: string;  
-    @Input() name!: string;
-    inputTypes = InputTypes;
 
-    value = ''; // Form control qiymatini saqlash uchun
-    isDisabled = false;
+export default class InputComponent{
 
-    @ViewChild('inputContainer') inputContainer!: ElementRef<HTMLDivElement>;
+    title = input<string>('');
+    placeholder = input<string>('');
+    imgUrl = input<string>('');
+    inputTypes = InputTypes
+    inputContainer = viewChild<ElementRef<HTMLDivElement>>('inputContainer');
     isPasswordHidden = signal(false);
 
-    // Callbacks for ControlValueAccessor
-    onChange = (value: any) => {};
-    onTouched = () => {};
 
-    writeValue(value: any): void {
-        this.value = value || '';
+    onFocus() {
+        
+        this.inputContainer()?.nativeElement.classList.add('focused')
+    }
+    onBlur (){
+        this.inputContainer()?.nativeElement.classList.remove('focused')
     }
 
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    setDisabledState(isDisabled: boolean): void {
-        this.isDisabled = isDisabled;
-    }
-
-    // Input qiymati o'zgarganda chaqiriladi
-    onInputChange(event: Event): void {
-        const input = event.target as HTMLInputElement;
-        this.value = input.value;
-        this.onChange(this.value);
-    }
-
-    onFocus(): void {
-        this.inputContainer.nativeElement.classList.add('focused');
-    }
-
-    onBlur(): void {
-        this.inputContainer.nativeElement.classList.remove('focused');
-        this.onTouched();
-    }
-
-    onPasswordToggle(): void {
-        this.isPasswordHidden.update((value) => !value);
+    onPasswordToggle(){
+        this.isPasswordHidden.update(value=>!value);
     }
 }
