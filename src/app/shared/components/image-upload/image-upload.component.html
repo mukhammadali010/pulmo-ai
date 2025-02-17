@@ -1,0 +1,29 @@
+<div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6">
+    <div class="question-card flex items-start gap-8 justify-between mt-5">
+        <form action="#" class="w-full">
+            <div class="flex flex-col w-3/4">
+                <label for="">Изоҳ</label>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Бемор ҳақида фикр қолдиринг...</mat-label>
+                    <textarea matInput placeholder="" rows="6"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="flex gap-2 flex-col">
+                <p *ngIf="imageUrl" class="text-green-500">Тасвир юкланди ✅</p>
+                <div class="flex gap-2 items-center">
+                    <label for="fileInput" class="custom-file-upload !flex !items-center gap-2">
+                        Тасвир юклаш <span class="text-red-500">*</span>
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*" (change)="onUpload($event)">
+                    <button [disabled]="!imageUrl" *ngIf="imageUrl" class="custom-file-upload">Сақлаш</button>
+                    <button [disabled]="!imageUrl || !path" *ngIf="imageUrl && path" class="custom-file-upload">Ташхис қўйиш</button>
+                </div>
+                <button *ngIf="imageUrl" mat-button (click)="clearImage()" class="w-fit text-white p-2 rounded">Тасвирни ўчириш</button>
+            </div>
+        </form>
+        <div class="w-full h-full imageContainer" [ngStyle]="{'background-image': 'url(' + (imageUrl ? imageUrl : '/assets/images/elementor-placeholder-image.webp') + ')'}">
+		</div>
+		
+    </div>
+</div>

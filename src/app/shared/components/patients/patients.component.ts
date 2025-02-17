@@ -33,18 +33,9 @@ export default class Patients {
       console.log(this.patientForm.value , 'test');
       this.router.navigate(['/home']);
     }else{
-      console.log('Form noto‘g‘ri to‘ldirilgan!');
+      alert('forma notogri toldirilgan')
     }
     
-  }
-
-  onTelChange(event: any) {
-    let phone = event.target.value;
-    phone = phone.replace(/\D/g, ''); // faqat raqamlarni qoldiradi
-    if (phone.length > 3 && phone.length <= 5) {
-      phone = `+998 (${phone.substring(3, 5)}) ${phone.substring(5, 8)}-${phone.substring(8, 10)}-${phone.substring(10, 12)}`;
-    }
-    event.target.value = phone;
   }
 }
 

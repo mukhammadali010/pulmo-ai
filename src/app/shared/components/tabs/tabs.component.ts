@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Parametrlar } from '../parametrlar/parametrlar.component';
 import { AudioUpload } from '../audio-upload/audio-upload.component';
+import { ImageUpload } from "../image-upload/image-upload.component";
 
 
 @Component({
@@ -9,7 +10,7 @@ import { AudioUpload } from '../audio-upload/audio-upload.component';
   standalone: true,
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
-  imports: [MatTabsModule, Parametrlar, AudioUpload,],
+  imports: [MatTabsModule, Parametrlar, AudioUpload, ImageUpload],
 })
 export class TabGroupAlignExample implements OnInit {
   selectedTabIndex: number = 0; // Default tab indeksi
