@@ -1,8 +1,7 @@
 <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 ">
 	<div class="question-card flex items-start justify-center flex-col mt-5">
 		<form action="#" class="w-full">
-			<label for="" class="mt-4">Беморнинг Ф.И.О <span class="text-red-500">*</span></label>
-			<app-input/>
+			
 			<div class="flex flex-col mt-4">
 				<label for="">Тавсиф</label>
 			<mat-form-field class="example-full-width" >
@@ -10,7 +9,7 @@
 				<textarea matInput placeholder="" rows="6"></textarea>
 			  </mat-form-field>
 			</div>
-		</form>
+		
 		<div class="flex gap-2 flex-col">
 			<p *ngIf="audioUrl" class="text-green-500">Aудио файл юкланди ✅</p>
 			<div class="flex gap-2 items-center">
@@ -29,6 +28,6 @@
 			</audio>
 			<button *ngIf="audioUrl" mat-button (click)="clearAudio()" class="w-fit text-white p-2 rounded">Aудиони ўчириш</button>
 		</div>
-		
+	</form>
 	</div>
 </div>

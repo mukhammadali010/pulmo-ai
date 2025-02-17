@@ -6,7 +6,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .primary-button{
-    @apply border border-solid border-black rounded-[1rem] cursor-pointer !important;
+    @apply border border-solid border-black rounded-lg cursor-pointer !important;
 }
 
 .group-gradient{

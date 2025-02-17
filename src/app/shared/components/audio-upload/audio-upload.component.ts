@@ -5,12 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import InputComponent from "../input/input.component";
 
 @Component({
   selector: 'app-audio-upload',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, InputComponent, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './audio-upload.component.html',
   styleUrls: ['./audio-upload.component.scss'],
 })
