@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import InputComponent from "../input/input.component";
 
 @Component({
   selector: 'app-audio-upload',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './audio-upload.component.html',
   styleUrls: ['./audio-upload.component.scss'],
 })
@@ -40,5 +41,17 @@ export class AudioUpload implements OnInit {
   clearAudio() {
     this.audioUrl = null;
     sessionStorage.removeItem('uploadedAudio'); // Saqlangan faylni o‘chirish
+  }
+
+  audioForm = new FormGroup({
+    id: new FormControl('' , [Validators.required ]),
+    comment: new FormControl(''),
+    audio: new FormControl('' , [Validators.required ]),
+  })
+
+
+  onSubmit(){
+    console.log(this.audioForm.value);
+    
   }
 }

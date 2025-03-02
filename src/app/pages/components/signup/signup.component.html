@@ -57,12 +57,13 @@
             </div>
             <div  class="error text-red-500 w-full h-2 flex items-center ">
                 <small *ngIf="password2.invalid && password2.touched && password2.errors?.['required']">Паролни киритинг.</small>
+                <small *ngIf="passwordMatchValidator(registerForm)">Parollar mos kelmadi.</small>
             </div>
         </div>
         <div class="flex justify-end mt-3">
             <a href="#" class="text-xl mt-3 text-blue-600">Паролингизни унутдингизми?</a>
         </div>
-        <button type="button" mat-button class=" w-full !rounded-lg !bg-primary !text-white mt-6" [disabled]="registerForm.invalid">Кириш</button>
+        <button type="button" mat-button class=" w-full !rounded-lg !bg-primary !text-white mt-6" type="submit" [disabled]="registerForm.invalid || passwordMatchValidator(registerForm)">Кириш</button>
         <div class="bg-gray-200 py-[1px] mt-6 w-3/4 mx-auto flex items-center justify-center">
             <p class="bg-white absolute p-2">ёки</p>
         </div>

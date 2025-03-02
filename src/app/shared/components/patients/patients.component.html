@@ -10,7 +10,13 @@
           <mat-label>Беморнинг Ф.И.О</mat-label>
           <input matInput placeholder="Ф.И.О" value="" formControlName="name">
         </mat-form-field>
-       
+         <!-- --------------input Jins (Gender) --------------- -->
+        <mat-label>Жинси</mat-label>
+        <mat-radio-group class="flex gap-4" formControlName="jins">
+          <mat-radio-button *ngFor="let item of jins" [value]="item.value">
+            {{ item.name }}
+          </mat-radio-button>
+        </mat-radio-group>
  <!-- --------------input sana --------------- -->
         <mat-form-field class=""> 
           <mat-label>Беморнинг туғилган санаси</mat-label>
@@ -21,18 +27,18 @@
         </mat-form-field>
 
 
-        <!-- --------------input TEl --------------- -->
-        <mat-form-field class="example-full-width">
-          <mat-label>Телефон рақам</mat-label>
-          <span matTextPrefix>+998 &nbsp;</span>
-          <input type="tel" matInput placeholder="90 123 45 67" formControlName="tel">
-          <mat-icon matSuffix>mode_edit</mat-icon>
-        </mat-form-field>
-
-        <button mat-button class="primary-button !rounded-sm mt-4" type="submit" >Сақлаш
+        <!-- --------------input Tel --------------- -->
+        <mat-form-field >
+          <mat-label>Telefon raqam</mat-label>
+          <input matInput type="text" formControlName="tel" 
+                 (input)="formatPhoneNumber($event)">
+          <mat-hint>Format: +998 XX XXX XX XX</mat-hint>
+        </mat-form-field>        
+        
+        <button mat-button class="primary-button !rounded-sm mt-4" type="submit">Сақлаш
         </button>
       </form>
     </div>
-
   </div>
 </main>
+

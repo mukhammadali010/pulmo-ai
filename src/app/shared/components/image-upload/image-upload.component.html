@@ -1,29 +1,43 @@
 <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6">
     <div class="question-card flex items-start gap-8 justify-between mt-5">
-        <form action="#" class="w-full">
+        <forfjdm action="#" class="w-full" [formGroup]="imageForm">
             <div class="flex flex-col w-3/4">
+
+                <label for="">Беморнинг ИД рақами </label>
+				<mat-form-field class="example-full-width">
+                    <mat-label>ИД рақам</mat-label>
+                    <input  type="number" matInput placeholder="" value="" formControlName="id">
+                  </mat-form-field>
+
                 <label for="">Изоҳ</label>
                 <mat-form-field class="example-full-width">
                     <mat-label>Бемор ҳақида фикр қолдиринг...</mat-label>
-                    <textarea matInput placeholder="" rows="6"></textarea>
+                    <textarea matInput placeholder="" rows="6" formControlName="comment"></textarea>
                 </mat-form-field>
             </div>
 
             <div class="flex gap-2 flex-col">
                 <p *ngIf="imageUrl" class="text-green-500">Тасвир юкланди ✅</p>
-                <div class="flex gap-2 items-center">
+                <div class="flex gap-2 items-center mt-11">
                     <label for="fileInput" class="custom-file-upload !flex !items-center gap-2">
                         Тасвир юклаш <span class="text-red-500">*</span>
                     </label>
-                    <input type="file" id="fileInput" accept="image/*" (change)="onUpload($event)">
+                    <input type="file" id="fileInput" accept="image/*" (change)="onUpload($event)" formControlName="image">
                     <button [disabled]="!imageUrl" *ngIf="imageUrl" class="custom-file-upload">Сақлаш</button>
                     <button [disabled]="!imageUrl || !path" *ngIf="imageUrl && path" class="custom-file-upload">Ташхис қўйиш</button>
                 </div>
                 <button *ngIf="imageUrl" mat-button (click)="clearImage()" class="w-fit text-white p-2 rounded">Тасвирни ўчириш</button>
             </div>
-        </form>
-        <div class="w-full h-full imageContainer" [ngStyle]="{'background-image': 'url(' + (imageUrl ? imageUrl : '/assets/images/elementor-placeholder-image.webp') + ')'}">
-		</div>
+        </forfjdm>
+        <div class="flex items-center  flex-col w-full">
+            <div class="w-full flex items-center h-[350px] justify-center">
+
+                <i *ngIf="!imageUrl">Расм жойланг</i>
+                <img *ngIf="imageUrl" [src]="imageUrl"  class="max-h-[300px] w-full object-contain" alt="">
+            </div>
+            <button  class="custom-file-upload w-full mt-4">Ташхис қўйиш</button>
+        </div>
+
 		
     </div>
 </div>

@@ -4,6 +4,8 @@ import { InputTypes } from '../../../shared/models/frontend/input-types';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,8 @@ import { NgIf } from '@angular/common';
 export default class LoginComponent {
   inputTypes = InputTypes;
 
+  errorMessage: string | null = null
+  loading = false
   user={
     email:'',
     password:''
@@ -29,12 +33,24 @@ export default class LoginComponent {
   @ViewChild('inputContainer2') inputContainer2!: ElementRef<HTMLDivElement>;
   isPasswordHidden = signal(false);
 
+  constructor(private router:Router , private authService:AuthService){}
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      console.log('Form Submitted:', form.value);
-    } else {
-      console.error('Form is invalid');
+    if (form.invalid) {
+      return
     }
+
+    this.loading = true
+    this.errorMessage = null
+
+    this.authService.login(form.value).subscribe({
+      next: () => {
+        this.router.navigate(["/patients-info"])
+      },
+      error: (error) => {
+        this.loading = false
+        this.errorMessage = error.error?.detail || "Invalid credentials. Please try again."
+      },
+    })
   }
 
   onChange = (value: any) => {};

@@ -1,12 +1,17 @@
 <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 ">
 	<div class="question-card flex items-start justify-center flex-col mt-5">
-		<form action="#" class="w-full">
+		<form action="#" class="w-full" [formGroup]="audioForm" (ngSubmit)="onSubmit()">
 			
 			<div class="flex flex-col mt-4">
+				<label for="">Беморнинг ИД рақами</label>
+				<mat-form-field class="example-full-width">
+                    <mat-label>ИД рақам</mat-label>
+                    <input  type="number" matInput placeholder="" formControlName="id" value="">
+                  </mat-form-field>
 				<label for="">Тавсиф</label>
 			<mat-form-field class="example-full-width" >
 				<mat-label>Бемор ҳақида фикр қолдиринг...</mat-label>
-				<textarea matInput placeholder="" rows="6"></textarea>
+				<textarea matInput placeholder="" rows="6" formControlName="comment"></textarea>
 			  </mat-form-field>
 			</div>
 		
@@ -16,7 +21,7 @@
 				<label for="fileInput" class="custom-file-upload !flex !items-center gap-2">
 					Aудио юклаш <span class="text-red-500">*</span>
 				  </label>
-				  <input type="file" id="fileInput" (input)="onUpload($event)">
+				  <input type="file" id="fileInput" (input)="onUpload($event)" accept="audio/*" formControlName="audio">
 				  <button [disabled]="" *ngIf="audioUrl" class="custom-file-upload">Сақлаш</button>
 				  <button [disabled]="" *ngIf="audioUrl && path" class="custom-file-upload">Ташхис қўйиш</button>
 
