@@ -1,6 +1,6 @@
 <main class="p-6">
   <app-navbar/>
-  <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 h-[35rem] mt-4">
+  <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6  mt-4">
     <h2 class="text-4xl mb-4">Бемор маълумотларини киритинг</h2>
     <div class="question-card flex items-start justify-start gap-4 flex-col mt-5 !w-1/2">
       <form class="w-full flex flex-col gap-3" [formGroup]="patientForm" (ngSubmit)="onSubmit()">
@@ -35,7 +35,7 @@
           <mat-hint>Format: +998 XX XXX XX XX</mat-hint>
         </mat-form-field>        
         
-        <button mat-button class="primary-button !rounded-sm mt-4" type="submit">Сақлаш
+        <button mat-button class="primary-button !rounded-sm mt-4" type="submit" (click)="openSnackBar('Малумотлар муваффақиятли сақланди' , 'OK')">Сақлаш
         </button>
       </form>
     </div>

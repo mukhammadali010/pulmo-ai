@@ -1,4 +1,4 @@
-<div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 ">
+<div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 m-5 ">
 	<div class="question-card flex items-start justify-center flex-col mt-5">
 		<form action="#" class="w-full" [formGroup]="audioForm" (ngSubmit)="onSubmit()">
 			
@@ -14,7 +14,6 @@
 				<textarea matInput placeholder="" rows="6" formControlName="comment"></textarea>
 			  </mat-form-field>
 			</div>
-		
 		<div class="flex gap-2 flex-col">
 			<p *ngIf="audioUrl" class="text-green-500">Aудио файл юкланди ✅</p>
 			<div class="flex gap-2 items-center">

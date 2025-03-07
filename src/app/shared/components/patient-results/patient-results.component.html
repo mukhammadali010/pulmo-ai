@@ -1,0 +1,16 @@
+<main class="p-6 bg-gray-100 min-h-screen flex flex-col">
+    <div class="sticky top-0">
+        <app-navbar/>
+    </div>
+  
+    <h2 class="text-3xl mt-6">Беморларнинг натижалари</h2>
+
+    @for (item of store.results(); track item.id) {
+        <div class="w-1/2 rounded-md mt-5 p-7 bg-white">
+            <h2>{{item?.title}}</h2>
+            <span>{{item.date}}</span>
+            <p>{{item.phone}}</p>
+            <p>{{item.name}}</p>
+        </div>
+    }
+</main>

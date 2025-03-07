@@ -5,6 +5,7 @@ export const routes: Routes = [
     {path:'home' , loadComponent:()=>import('./pages/components/home/home.component')},
    
     {path:'login' , loadComponent:()=>import('./pages/components/login/login.component')},
+    {path:'patient-results' , loadComponent:()=>import('./shared/components/patient-results/patient-results.component')},
     {path:'signup' , loadComponent:()=>import('./pages/components/signup/signup.component')},
     {path:'profile' , loadComponent:()=>import('./pages/components/profile/profile.component')},
     {path:'not-found' , loadComponent:()=>import('./shared/components/not-found/not-found.component')},
