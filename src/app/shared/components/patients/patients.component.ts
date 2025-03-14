@@ -91,12 +91,12 @@ export default class Patients {
       // Telefon raqam to‘liq kiritilganini tekshirish
       const phoneValue = formData.tel as string
       if (!phoneValue || phoneValue.length < 17) {
-        this.openSnackBar("Телефон рақам тўлиқ киритилмаган!", "Close") // ✅ Snackbar chaqirilmoqda
+        this.openSnackBar("Телефон рақам тўлиқ киритилмаган!", "Close") 
         return
       }
       this.router.navigate(["/home"])
     } else {
-      this.openSnackBar("Илтимос, барча майдонларни тўлдиринг!", "Close") // ✅ Snackbar validatsiya uchun
+      this.openSnackBar("Илтимос, барча майдонларни тўлдиринг!", "Close")
     }
   }
 }

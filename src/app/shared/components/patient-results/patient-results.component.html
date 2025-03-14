@@ -6,7 +6,7 @@
     <h2 class="text-3xl mt-6">Беморларнинг натижалари</h2>
 
     @for (item of store.results(); track item.id) {
-        <div class="w-1/2 rounded-md mt-5 p-7 bg-white">
+        <div class="w-1/2 max-[768px]:w-full rounded-md mt-5 p-7 bg-white">
             <h2>{{item?.title}}</h2>
             <span>{{item.date}}</span>
             <p>{{item.phone}}</p>

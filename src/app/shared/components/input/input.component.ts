@@ -1,43 +1,64 @@
 import { CommonModule } from "@angular/common";
-import { Component, ElementRef, forwardRef, Input, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, forwardRef, inject, input, Input, signal, viewChild, ViewChild } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
+
+import { AbstractControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { InputTypes } from "../../models/frontend/input-types";
+
+
 
 @Component({
     selector: "app-input",
     templateUrl: "./input.component.html",
     imports: [CommonModule, MatIconModule],
-    styles: [
-        ` .focused {
-            @apply outline outline-blue-500 outline-1;
-        }`
-    ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => InputComponent),
             multi: true
         }
+    ],
+    styles: [
+        ` .focused{
+            @apply outline outline-blue-500 outline-1;
+        }
+        `
     ]
+
 })
-export default class InputComponent implements ControlValueAccessor {
 
-    @Input() title: string = '';
-    @Input() placeholder: string = '';
-    @Input() formName: string = '';
-    @Input() imgUrl: string = '';
+export default class InputComponent {
+
+    title = input<string>('');
+    placeholder = input<string>('');
+    imgUrl = input<string>('');
     inputTypes = InputTypes;
-    isPasswordHidden = false;
+    inputContainer = viewChild<ElementRef<HTMLDivElement>>('inputContainer');
+    value: string = ''
+    isPasswordHidden = signal(false);
+    control = input<AbstractControl<any, any> | null>();
+    error = signal('');
 
-    @ViewChild('inputContainer') inputContainer!: ElementRef<HTMLDivElement>;
+    onFocus() {
 
-    value: string = '';
+        this.inputContainer()?.nativeElement.classList.add('focused')
+    }
+    onBlur() {
+        this.inputContainer()?.nativeElement.classList.remove('focused');
+        this.onTouched();
+    }
 
-    onChange: (value: string) => void = () => {};
-    onTouched: () => void = () => {};
+    onPasswordToggle() {
+        this.isPasswordHidden.update(value => !value);
+    }
 
-    writeValue(value: string | null): void {
+    //  Custom Value Accessor
+
+    private onChange: (value: string) => void = () => { };
+    private onTouched: () => void = () => { };
+
+    isDisabled: boolean = false;
+    writeValue(value: string): void {
         this.value = value || '';
     }
 
@@ -49,26 +70,50 @@ export default class InputComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
-    setDisabledState?(isDisabled: boolean): void {
-        // Agar input disable qilish kerak bo'lsa, bu yerda bajariladi
+  
+    onInputChange(value: string) {
+        const newValue = value;
+        this.value = newValue;
+        if (this.onChange) {
+            this.onChange(newValue);
+        }
+
+        if (this.control()) {
+            console.log(this.control()?.parent?.controls, 'test');
+            const firstError = Object.keys(this.control()?.errors || {})[0];
+            if (!firstError) {
+                this.error.set('');
+                return;
+            }
+            switch (firstError) {
+                case 'minlength': this.error.set(` Камида ${this.control()?.errors?.[firstError]?.requiredLength} та белгидан иборат бўлиши керак`);
+                    break;
+                case 'maxlength':
+                    this.error.set(
+                        `Энг кўпи билан ${this.control()?.errors?.[firstError]?.requiredLength} та белгидан иборат бўлиши керак`
+                    );
+                    break;
+
+                case 'email':
+                    this.error.set('Тўғри электрон почта бўлиши керак');
+                    break;
+
+                case 'required':
+                    this.error.set(`Мажбурий`);
+                    break;
+
+                case 'uppercaseLowercase':
+                    this.error.set(
+                        'Камида битта катта ва битта кичик ҳарфни ўз ичига олиши керак'
+                    );
+                    break;
+
+                default:
+                    this.error.set('Хатолик: ');
+            }
+        }
+
     }
 
-    onFocus() {
-        this.inputContainer.nativeElement.classList.add('focused');
-        this.onTouched();
-    }
 
-    onBlur() {
-        this.inputContainer.nativeElement.classList.remove('focused');
-    }
-
-    onPasswordToggle() {
-        this.isPasswordHidden = !this.isPasswordHidden;
-    }
-
-    handleInput(event: Event) {
-        const inputElement = event.target as HTMLInputElement;
-        this.value = inputElement.value;
-        this.onChange(this.value);
-    }
 }

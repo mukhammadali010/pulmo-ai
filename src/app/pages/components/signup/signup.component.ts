@@ -1,70 +1,50 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-
-
+import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { InputTypes } from '../../../shared/models/frontend/input-types';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service.service';
-import { HttpClientModule } from '@angular/common/http';
+import InputComponent from "../../../shared/components/input/input.component";
 
 @Component({
   selector: 'app-signup',
-  imports: [ MatButton , MatIconModule ,NgIf , FormsModule , HttpClientModule],
+  imports: [MatButton, MatIconModule, FormsModule, ReactiveFormsModule, InputComponent],
   templateUrl: './signup.component.html',
 
 })
-export default class SignUpComponent {
+export default class SignUpComponent implements OnInit {
   inputTypes = InputTypes;
-  @ViewChild('inputContainer') inputContainer!: ElementRef<HTMLDivElement>;
-  errorMessage: string | null = null
-  loading = false
+  formBuilder = inject(FormBuilder);
+  inputContainer = viewChild<ElementRef<HTMLDivElement>>('')
+  registerForm!: FormGroup;
 
-
-  constructor(private router:Router , private authService:AuthService ){};
-
-  onChange = (value: any) => {};
-  onTouched = () => {};
-  onFocus(): void {
-    this.inputContainer.nativeElement.classList.add('focused');
-  }
-  
-  onBlur(): void {
-    this.inputContainer.nativeElement.classList.remove('focused');
-    this.onTouched();
-  }
-
-  passwordMatchValidator(form: NgForm) {
-    return form.controls["password"]?.value === form.controls["password2"]?.value ? null : { mismatch: true }
-  }
-
-  onSubmit(form: NgForm) {
-    console.log(form);
-    
-    if (form.invalid) {
-      return
-    }
-
-    this.loading = true
-    this.errorMessage = null
-
-    if (form.valid || this.passwordMatchValidator(form)) {
-      console.log('Form Submitted:', form.value);
-    } else {
-      console.error('Form is invalid');
-    }
-
-    this.authService.register(form.value).subscribe({
-      next: () => {
-        this.router.navigate(["/login"])
-      },
-      error: (error) => {
-        this.loading = false
-        this.errorMessage = error.error?.detail || "Registration failed. Please try again."
-      },
+  ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-Zʻ‘’`\s\-]*$/), this.textTrimValidators]],
+      surName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-Zʻ‘’`\s\-]*$/), this.textTrimValidators]],
+      email: ['', [Validators.required, Validators.minLength(2), Validators.email, Validators.pattern(/^[a-zA-Zʻ‘’`\s\-]*$/), this.textTrimValidators]],
+      password: ['', [Validators.required, Validators.minLength(6), this.textTrimValidators, this.uppercaseLowercaseValidators]],
+      password2: ['', [Validators.required, Validators.minLength(6), this.textTrimValidators, this.uppercaseLowercaseValidators]],
     })
   }
+
+  textTrimValidators(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value.trim().length === 0) {
+      return { whitespace: true }
+    } else {
+      return null
+    }
+  }
+  uppercaseLowercaseValidators(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
+      return { uppercaseLowercase: true };
+    }
+    return null;
+  }
+
+
+
+
 
 }

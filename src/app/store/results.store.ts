@@ -1,9 +1,6 @@
 import { signalStore, withMethods, withState } from "@ngrx/signals";
 import { PateintResultsType } from "../shared/models/frontend/patient-results";
 
-
-
-
 type PatientResultsStore = {
     results:PateintResultsType[];
 }

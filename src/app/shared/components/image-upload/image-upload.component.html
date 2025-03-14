@@ -1,7 +1,8 @@
 <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 m-5">
     <div class="question-card flex items-start gap-8 justify-between mt-5">
-        <form action="#" class="w-full" [formGroup]="imageForm">
-            <div class="flex flex-col w-3/4">
+        <form action="#" class="w-full flex justify-between max-[768px]:flex-col" [formGroup]="imageForm">
+            <div class="w-1/2 max-[768px]:w-full">
+            <div class="flex flex-col">
 
                 <label for="">Беморнинг ИД рақами </label>
 				<mat-form-field class="example-full-width">
@@ -28,8 +29,9 @@
                 </div>
                 <button *ngIf="imageUrl" mat-button (click)="clearImage()" class="w-fit text-white p-2 rounded">Тасвирни ўчириш</button>
             </div>
-        </form>
-        <div class="flex items-center  flex-col w-full">
+         </div>
+
+        <div class="flex items-center  flex-col w-1/2 max-[768px]:w-full">
             <div class="w-full flex items-center h-[350px] justify-center">
 
                 <i *ngIf="!imageUrl">Расм жойланг</i>
@@ -37,7 +39,6 @@
             </div>
             <button  class="custom-file-upload w-full mt-4">Ташхис қўйиш</button>
         </div>
-
-		
-    </div>
+    </form>
+</div>
 </div>

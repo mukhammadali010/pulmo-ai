@@ -1,10 +1,10 @@
 <main>
     <div class="container mx-auto flex items-center justify-center flex-col w-full shadow-xl p-6 h-[35rem] m-5">
-      <h2 class="text-4xl mb-4">Касаллик параметрларни танланг</h2>
+      <h2 class="text-4xl mb-4 max-[576px]:text-2xl">Касаллик параметрларни танланг</h2>
   
       <form class="flex items-center justify-center flex-col w-full max-w-2xl">
-        <div class="question-card relative" *ngIf="currentSavol">
-          <strong class="text-xl block mb-4">{{ currentPage + 1 }}. {{ currentSavol.savol }}</strong>
+        <div class="question-card relative max-[576px]:h-auto md:h-[350px]" *ngIf="currentSavol">
+          <strong class="text-xl block mb-4 max-[576px]:text-sm">{{ currentPage + 1 }}. {{ currentSavol.savol }}</strong>
           <mat-radio-group
             [(ngModel)]="answers[currentPage]"
             name="answer-{{ currentPage }}"

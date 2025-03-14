@@ -1,6 +1,6 @@
 <mat-toolbar class="!flex !items-center justify-between !bg-gray-200 rounded-lg m-6 sticky top-0 z-10">
           <span class="flex items-center text-2xl font-bold bg-gradient-to-r from-blue-950  to-pink-700 bg-clip-text text-transparent cursor-pointer" routerLink="/home"><img src="assets/images/logo.png" alt="" class="w-12" >Pulmo AI</span>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 max-[576px]:hidden">
     
     
       <button mat-button matTooltip="Қўллаб-қувватлаш хизмати" matTooltipClass="custom-tooltip" class="primary-button"><a href="tel:+998904061430" class="group-gradient ">+99890 406 14 30</a> </button>
@@ -9,7 +9,7 @@
       
     </div>
     <div class="flex items-center gap-2 text-left" [matMenuTriggerFor]="menu">
-        <p class="text-sm text-right cursor-pointer group-gradient">Носиров.М.У <br> <span >muhammadalinosirov34gmail.com</span></p>
+        <p class="text-sm text-right cursor-pointer group-gradient max-[768px]:hidden">Носиров.М.У <br> <span >muhammadalinosirov34gmail.com</span></p>
         <button mat-icon-button class="!bg-gray-400" aria-label="Example icon-button with heart icon">
             <mat-icon>person</mat-icon>
         </button>
